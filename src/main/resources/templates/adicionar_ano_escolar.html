@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}" type="text/css" >
+
+</head>
+<body>
+<form action="#" class="form_container_data" th:action="@{../content/year}" method="post">
+    <div class="form-field-data" >
+        <label  class="control-label">Ano</label>
+        <input name="year" required="true" type="text"/>
+    </div>
+    <div class="form-field" >
+        <button type="submit">Adicionar</button>
+    </div>
+</form>
+<div style="text-align:center;background:white" >
+    <div th:if="${successMessage}" th:text="${successMessage}" class="successMessage"></div>
+    <div class="menu_return"><a th:href="@{../control}" >retornar ao menu</a></div>
+</div>
+<footer>
+    <img class="logo" src="../static/images/mathschoollogo.png" th:src="@{/images/mathschoollogo.png}">
+</footer>
+</body>
+</html>

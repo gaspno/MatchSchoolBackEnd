@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}" type="text/css" >
+    <style>
+        .nav_list{
+            text-align:center;
+            margin:0 auto;
+            background: linear-gradient(90deg, rgba(15,153,205,1) 0%, rgba(13,225,226,1) 35%, rgba(15,153,205,1) 100%);
+        }
+        .nav_list ul{
+        width:60%;
+        margin:0 auto;
+         display:flex;
+            justify-content:space-around;
+            align-items:center;
+        }
+
+        .nav_list li{
+         display: inline-block;
+         padding: 0.5em;
+
+         border:2px solid blue;
+         margin:1em;
+         border-radius:0.5em;
+         padding:0;
+         background: linear-gradient(90deg, rgba(166,205,15,1) 0%, rgba(13,226,109,0.7457107843137255) 35%, rgba(24,194,103,1) 100%);
+        }
+        .nav_list li a {
+            color: white;
+            height: 100%;
+            width: 100%;
+            margin:0;
+            font-size:1.5em;
+            padding:1em;
+            text-align:center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="nav_list">
+        <ul >
+            <li>
+               <a th:href="@{control/year}">Adicionar ano escolar</a>
+            </li>
+            <li>
+                <a th:href="@{control/subject}">Adicionar materias</a>
+            </li>
+            <li>
+                <a th:href="@{control/class}">Adicionar aulas</a>
+            </li>
+            <li>
+                <a th:href="@{control/test}">Adicionar teste</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<footer>
+    <img class="logo" src="../static/images/mathschoollogo.png" th:src="@{/images/mathschoollogo.png}">
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}" type="text/css" >
+    <script th:inline="javascript">
+        let subjects = [[${subjects}]];
+
+    </script>
+</head>
+<body>
+<div class="container_select_form">
+    <form action="#"  th:action="@{../content/test}" method="post" id="test_form">
+        <label for="subject_choose" class="control-label" >Escolha o ano e assunto:</label>
+        <div class="field_select_container">
+            <select name="year" id="year_choose" form="test_form" required>
+                <option value="" disabled selected>Selecione um ano</option>
+                <option th:each="year : ${years}" th:text="${year.name}"></option>
+            </select>
+            <select name="subject" id="subject_choose" form="test_form" required>
+                <!--<option th:each="subject : ${subjects}" th:text="${subject.name}"></option>-->
+            </select>
+        </div>
+        <button type="button" class="btn_add" id="adicionar">Adicionar questão</button>
+        <button type="submit" class="btn_add" id="adicionar_teste">Adicionar teste</button>
+
+    </form>
+    <div id="container"></div>
+</div>
+<div style="text-align:center;background:white" >
+<div id="Message" class="successMessage hidden"></div>
+<div class="menu_return"><a th:href="@{../control}" >retornar ao menu</a></div>
+</div>
+<footer>
+    <img class="logo" src="../static/images/mathschoollogo.png" th:src="@{/images/mathschoollogo.png}">
+</footer>
+<script>
+    let container=document.getElementById("container")
+    let questions=[]
+    let yearSelect=document.getElementById("year_choose");
+    let form=document.getElementById("test_form")
+    yearSelect.addEventListener("change",()=>{
+            let subjectSelect=document.getElementById("subject_choose");
+            subjectSelect.innerHTML = '<option value="" disabled selected>Selecione uma matéria</option>';
+            subjects.forEach((subject)=>{
+                if(yearSelect.value==subject.schoolYear.name){
+                    subjectSelect.innerHTML+=`<option value="${subject.name}">${subject.name}</option>`
+                }
+            })})
+    form.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        if(questions.length==0){
+            alert("Nenhuma questão adicionada")
+            return
+        }
+        let formData=new FormData();
+        formData.append('questions', JSON.stringify(questions));
+        formData.append('subject', document.getElementById("subject_choose").value)
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+            redirect:"follow"
+        }).then(response => {
+            if (response.ok) {
+              questions=[]
+              document.getElementById("subject_choose").value="";
+              yearSelect.value="";
+              document.getElementById("Message").innerHTML="Teste adicionado com sucesso";
+              document.getElementById("Message").classList.remove("hidden");
+            }
+        })
+    })
+
+    let adicionar=document.getElementById("adicionar")
+    adicionar.addEventListener("click",(event)=>{
+        addQuiz();
+    })
+    function addQuiz(){
+        clearContainer();
+        let divQuiz=document.createElement("div")
+        let divEnunciado=document.createElement("div");
+        divEnunciado.classList.add("quiz_enunciado");
+        divEnunciado.classList.add("form-field-data")
+        divQuiz.classList.add("quiz_options");
+        container.appendChild(divEnunciado)
+        container.appendChild(divQuiz)
+        addField("Insira aqui o enunciado do quiz que deseja adicionar","enunciado",divEnunciado);
+        let divOption1=document.createElement("div");
+        let divOption2=document.createElement("div");
+        let divOption3=document.createElement("div");
+        let divOption4=document.createElement("div");
+        divOption1.classList.add("form-field-data");
+        divOption2.classList.add("form-field-data");
+        divOption3.classList.add("form-field-data");
+        divOption4.classList.add("form-field-data");
+        divQuiz.appendChild(divOption1);
+        divQuiz.appendChild(divOption2);
+        divQuiz.appendChild(divOption3);
+        divQuiz.appendChild(divOption4);
+        addField("Insira aqui a alternativa 1","alternativa1",divOption1);
+        addField("Insira aqui a alternativa 2","alternativa2",divOption2);
+        addField("Insira aqui a alternativa 3","alternativa3",divOption3);
+        addField("Insira aqui a alternativa 4","alternativa4",divOption4);
+        let correctChoose=document.createElement("select");
+        correctChoose.name="correctAwnser";
+        for(let i=0;i<4;i++){
+            let option=document.createElement("option");
+            option.value=i+1;
+            option.textContent="alternativa "+(i+1);
+            correctChoose.appendChild(option);
+        }
+        container.appendChild(correctChoose);
+        let button=document.createElement("button");
+        button.textContent="Adicionar Question";
+        button.onclick=()=>{
+            let quizData={
+                quiz:{
+                    enunciado:enunciado.value,
+                    alternativa1:alternativa1.value,
+                    alternativa2:alternativa2.value,
+                    alternativa3:alternativa3.value,
+                    alternativa4:alternativa4.value,
+                    correctnswer:correctChoose.value
+                }
+            };
+            questions.push(quizData);
+            clearContainer();
+        }
+        container.appendChild(button)
+    }
+function addField(labelText,nameInput,parent){
+        let label=document.createElement("label");
+        label.textContent=labelText;
+
+        let input=document.createElement("input");
+        input.type="text";
+        input.name=nameInput;
+        input.id=nameInput;
+
+        parent.appendChild(label);
+        parent.appendChild(input);
+  }
+    function clearContainer(){
+        while(container.firstChild){
+            container.removeChild(container.firstChild);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}" type="text/css" >
+    <style>
+        html,body{
+            height:100%;
+            width:100%;
+            display:flex;
+            background:gray
+
+        }
+        .container_login_form{
+        display:flex;
+        margin:auto;
+        height:50%;
+        width:50%;
+        background:green;
+        }
+        .container_form{
+        margin:auto;
+        display:flex;
+        padding-top:1em;
+        flex-direction:column;
+        width:80%;
+        background:blue;
+        }
+        button{
+            width:50%;
+            margin:2em auto;
+            padding:0.5em;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container_login_form">
+
+    <form class="container_form"    method="post"
+              th:action="@{/login}"
+            >
+        <div class="form-field">
+        <label class="control-label" > Email</label>
+        <input
+                type="text"
+                id="username"
+                name="username"
+        />
+        </div>
+        <div class="form-field">
+            <label class="control-label"> Password</label>
+            <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required="true"
+                    placeholder="Digite sua senha"
+            />
+        </div>
+        <button type="submit">login</button>
+    </form>
+</div>
+
+</body>
+</html>

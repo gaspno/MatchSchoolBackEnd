@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}" type="text/css" >
+
+</head>
+<body>
+<form action="#"   th:action="@{../content/subject}" method="post" id="subject_form" class="form_container_data" enctype="multipart/form-data" >
+
+    <div class="form-field-data" >
+    <label for="year_choose">Escolha o ano:</label>
+    <select name="year" id="year_choose" form="subject_form">
+        <option th:each="year : ${years}" th:text="${year.name}"></option>
+    </select>
+    </div>
+    <div>
+        <label>Nome do Assunto</label>
+        <input name="subject" required="required" type="text"/>
+    </div>
+    <div>
+        <label>Imagem para o Assunto</label>
+        <input name="image"  type="file" required="required"/>
+    </div>
+    <button type="submit">Adicionar</button>
+</form>
+<div style="text-align:center;background:white" >
+    <div th:if="${successMessage}" th:text="${successMessage}" class="successMessage"></div>
+    <div class="menu_return"><a th:href="@{../control}" >retornar ao menu</a></div>
+</div>
+<footer>
+    <img class="logo" src="../static/images/mathschoollogo.png" th:src="@{/images/mathschoollogo.png}">
+</footer>
+</body>
+</html>
