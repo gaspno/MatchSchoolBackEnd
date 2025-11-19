@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--
+Suggestions for improvement:
+1.  **Title:** The <title> tag should have a descriptive title, e.g., "Adicionar Aula".
+2.  **External JavaScript:** The JavaScript code should be moved to an external .js file to separate concerns and improve maintainability.
+3.  **Code Duplication:** The JavaScript code in this file is very similar to the code in "adicionar_teste.html". The common functions should be extracted into a shared JavaScript file.
+4.  **Accessibility:** The dynamically generated form elements are not properly labeled, which is problematic for accessibility. The labels should be associated with the inputs using the "for" attribute.
+5.  **Thymeleaf Fragments:** The dynamic form generation could be simplified by using Thymeleaf fragments to render the different types of content, rather than building the HTML entirely in JavaScript.
+-->
 <head>
     <meta charset="UTF-8">
     <title>Title</title>

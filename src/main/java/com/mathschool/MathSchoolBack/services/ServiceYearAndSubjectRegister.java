@@ -21,6 +21,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/*
+ * This class is a service that contains business logic.
+ * It is not a controller, so the @RestController annotation is not appropriate.
+ * It should be replaced with the @Service annotation.
+ */
 @RestController
 @RequestMapping("")
 public class ServiceYearAndSubjectRegister {
