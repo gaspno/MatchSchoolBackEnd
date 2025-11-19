@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<!--
+Suggestions for improvement:
+1.  **Title:** The <title> tag should have a descriptive title, e.g., "Login".
+2.  **External CSS:** The CSS styles should be moved to an external .css file to separate concerns and improve maintainability.
+3.  **Accessibility:** The labels for the "Email" and "Password" input fields should be associated with their respective inputs using the "for" attribute.
+    Example:
+    <label for="username">Email</label>
+    <input id="username" name="username" type="text"/>
+4.  **Error Handling:** There is no mechanism to display login error messages. A section should be added to display errors using Thymeleaf's conditional rendering.
+    Example:
+    <div th:if="${param.error}" class="alert alert-danger">
+        Invalid username and password.
+    </div>
+-->
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
